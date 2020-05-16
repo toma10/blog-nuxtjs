@@ -1,8 +1,8 @@
 <template>
   <div>
-    <date-time :dateTime="post.frontmatter.date">
-      {{ formatDate(post.frontmatter.date) }}
-    </date-time>
+    <date-time :dateTime="post.frontmatter.date">{{
+      formatDate(post.frontmatter.date)
+    }}</date-time>
     <nuxt-link :to="{ name: 'posts-slug', params: { slug: post.slug } }">
       <subtitle>{{ post.frontmatter.title }}</subtitle>
       <div class="mt-3">
@@ -10,9 +10,9 @@
       </div>
     </nuxt-link>
     <div class="mt-3">
-      <styled-link :to="{ name: 'posts-slug', params: { slug: post.slug } }">
-        Read full story
-      </styled-link>
+      <styled-link :to="{ name: 'posts-slug', params: { slug: post.slug } }"
+        >Read full story</styled-link
+      >
     </div>
   </div>
 </template>

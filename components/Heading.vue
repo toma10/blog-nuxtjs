@@ -1,3 +1,5 @@
 <template>
-  <div class="mt-16"><slot /></div>
+  <div class="mt-16">
+    <slot />
+  </div>
 </template>

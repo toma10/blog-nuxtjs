@@ -1,9 +1,5 @@
-import fs from 'fs'
-import path from 'path'
-import glob from 'glob'
-import matter from 'gray-matter'
+import { allPosts } from './lib/post-queries'
 import config from './config'
-import { excerpt } from './helpers'
 
 export default {
   mode: 'spa',
@@ -99,25 +95,14 @@ export default {
     }
   },
   generate: {
-    routes() {
-      const fileNames = glob.sync('posts/**/*.md')
+    async routes() {
+      const posts = await allPosts()
 
-      const routes = fileNames.map((fileName) => {
-        const content = fs.readFileSync(path.resolve(__dirname, fileName))
-        const data = matter(content, {
-          excerpt: (file) => {
-            file.excerpt = excerpt(file.content)
-          }
-        })
-
+      const routes = posts.map((post) => {
         return {
-          route: fileName,
+          route: `/posts/${post.slug}`,
           payload: {
-            post: {
-              frontmatter: data.data,
-              excerpt: data.excerpt,
-              markdownBody: data.content
-            }
+            post
           }
         }
       })

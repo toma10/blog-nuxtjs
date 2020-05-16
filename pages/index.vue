@@ -12,12 +12,11 @@
 </template>
 
 <script>
-import matter from 'gray-matter'
-import { excerpt } from '~/helpers'
 import Heading from '~/components/Heading'
 import XTitle from '~/components/XTitle'
 import XContent from '~/components/XContent'
 import Post from '~/components/Post'
+import { formatPost } from '~/lib/post-formatters'
 
 export default {
   components: {
@@ -33,25 +32,17 @@ export default {
   },
   asyncData() {
     const posts = ((context) => {
-      const keys = context.keys()
-      const values = keys.map(context)
+      const postPaths = context.keys()
+      const contents = postPaths.map(context)
 
-      const data = keys.map((key, index) => {
-        const value = values[index]
-        const document = matter(value.default)
-
+      const data = postPaths.map((key, index) => {
         const slug = key
           .replace(/^.*[\\/]/, '')
           .split('.')
           .slice(0, -1)
           .join('.')
 
-        return {
-          frontmatter: document.data,
-          markdownBody: document.content,
-          slug,
-          excerpt: excerpt(document.content)
-        }
+        return formatPost({ slug, content: contents[index].default })
       })
 
       return data

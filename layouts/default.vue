@@ -1,7 +1,9 @@
 <template>
   <layout>
     <x-header :title="title" :subtitle="subtitle"></x-header>
-    <main><nuxt /></main>
+    <main>
+      <nuxt />
+    </main>
   </layout>
 </template>
 
