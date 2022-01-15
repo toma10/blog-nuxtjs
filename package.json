@@ -27,7 +27,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "excerpt-html": "^1.2.1",
     "front-matter": "^3.2.1",
-    "marked": "^1.0.0",
+    "marked": "^4.0.10",
     "prettier": "^1.16.4",
     "raw-loader": "^4.0.1"
   }
